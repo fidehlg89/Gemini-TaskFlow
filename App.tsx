@@ -22,13 +22,37 @@ function App() {
     localStorage.setItem('gemini-todo-tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  const exportTasks = () => {
+  const exportTasks = async () => {
     const dataStr = JSON.stringify(tasks, null, 2);
+    const fileName = `gemini-tasks-${new Date().toISOString().split('T')[0]}.json`;
+
+    // Try modern File System Access API (Save As)
+    if ('showSaveFilePicker' in window) {
+      try {
+        const handle = await (window as any).showSaveFilePicker({
+          suggestedName: fileName,
+          types: [{
+            description: 'JSON File',
+            accept: { 'application/json': ['.json'] },
+          }],
+        });
+        const writable = await handle.createWritable();
+        await writable.write(dataStr);
+        await writable.close();
+        return;
+      } catch (err: any) {
+        // User cancelled the picker is a common "error" we should ignore
+        if (err.name === 'AbortError') return;
+        console.error("Save File Picker error:", err);
+      }
+    }
+
+    // Fallback to classic download
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `gemini-tasks-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
