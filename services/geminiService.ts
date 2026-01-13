@@ -2,9 +2,21 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Priority, AiSuggestion } from "../types";
 
 // Initialize Gemini Client
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+const getApiKey = () => {
+  // Vite way
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_GEMINI_API_KEY) {
+    return import.meta.env.VITE_GEMINI_API_KEY;
+  }
+  // Generic process.env way
+  if (typeof process !== 'undefined' && process.env && process.env.VITE_GEMINI_API_KEY) {
+    return process.env.VITE_GEMINI_API_KEY;
+  }
+  return '';
+};
+
+const apiKey = getApiKey();
 const ai = new GoogleGenAI({ apiKey });
-const MODEL_NAME = 'gemini-2.0-flash-exp';
+const MODEL_NAME = 'gemini-1.5-flash';
 
 /**
  * Breaks down a complex task into actionable subtasks.
