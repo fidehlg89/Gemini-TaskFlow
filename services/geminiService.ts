@@ -2,8 +2,9 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Priority, AiSuggestion } from "../types";
 
 // Initialize Gemini Client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-const MODEL_NAME = 'gemini-3-flash-preview';
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey });
+const MODEL_NAME = 'gemini-2.0-flash-exp';
 
 /**
  * Breaks down a complex task into actionable subtasks.
