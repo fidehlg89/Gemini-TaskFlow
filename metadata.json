@@ -1,0 +1,5 @@
+{
+  "name": "Gemini TaskFlow",
+  "description": "A smart to-do list application enhanced by Gemini AI to break down complex tasks, prioritize work, and provide productivity insights.",
+  "requestFramePermissions": []
+}
