@@ -12,7 +12,7 @@ export interface Task {
   createdAt: number;
   isAiGenerated?: boolean;
   parentId?: string;
-  isExpanded?: boolean; // New property for collapse state
+  isExpanded?: boolean;
 }
 
 export enum FilterType {

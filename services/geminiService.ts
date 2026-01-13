@@ -16,7 +16,7 @@ const getApiKey = () => {
 
 const apiKey = getApiKey();
 const ai = new GoogleGenAI({ apiKey });
-const MODEL_NAME = 'gemini-1.5-flash';
+const MODEL_NAME = 'gemini-3-flash-preview';
 
 /**
  * Breaks down a complex task into actionable subtasks.
@@ -52,10 +52,10 @@ export const breakDownTask = async (taskText: string): Promise<AiSuggestion[]> =
     const jsonText = response.text;
     if (!jsonText) return [];
 
-    const result = JSON.parse(jsonText) as { text: string, priority: string }[];
+    const parsedResult = JSON.parse(jsonText) as { text: string, priority: string }[];
 
     // Map string priority to Enum
-    return result.map(item => ({
+    return parsedResult.map(item => ({
       text: item.text,
       priority: item.priority as Priority
     }));
