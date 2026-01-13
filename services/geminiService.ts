@@ -38,9 +38,9 @@ export const breakDownTask = async (taskText: string): Promise<AiSuggestion[]> =
 
     const jsonText = response.text;
     if (!jsonText) return [];
-    
+
     const result = JSON.parse(jsonText) as { text: string, priority: string }[];
-    
+
     // Map string priority to Enum
     return result.map(item => ({
       text: item.text,
@@ -49,7 +49,7 @@ export const breakDownTask = async (taskText: string): Promise<AiSuggestion[]> =
 
   } catch (error) {
     console.error("Error breaking down task:", error);
-    return [];
+    throw error;
   }
 };
 
@@ -72,6 +72,6 @@ export const getProductivityInsight = async (taskCount: number, completedCount: 
     return response.text || "Keep moving forward!";
   } catch (error) {
     console.error("Error getting insight:", error);
-    return "Focus on one thing at a time.";
+    throw error;
   }
 };
