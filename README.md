@@ -81,7 +81,7 @@ This project was built as an experimental collaboration between human creativity
 1. Fork the repo.
 2. Create your feature branch.
 3. Submit a Pull Request.
-4. Or simply leave a comment on my [LinkedIn post](https://github.com/fidehlg89/Gemini-TaskFlow)!
+4. Or simply leave a comment on my [LinkedIn post](https://www.linkedin.com/posts/activity-7416906044024713216-hZls?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADtXiFsBqRFCyDhqk2cvqYGqFCXgWjd6RRo)!
 
 ---
 
